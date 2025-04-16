@@ -9,7 +9,7 @@ import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
-import Subjects from './pages/Subjects';
+import Classes from './pages/Classes';
 import Support from './pages/Support';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/subjects" element={<Subjects />} />
+          <Route path="/classes" element={<Classes />} />
           <Route path="/support" element={<Support />} />
         </Routes>
         <Footer />

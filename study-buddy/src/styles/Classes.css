@@ -1,0 +1,261 @@
+/* === Main Container === */
+  .classes-page {
+    padding: 60px 40px;
+    max-width: 2000px;
+    margin: 0 auto;
+    background-color: #ffffff;
+  }
+  
+  /* === Hero Section === */
+  .classes-hero {
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: #ffffff;
+    border-radius: 12px;
+  }
+  
+  .classes-hero h1 {
+    font-size: 4rem;
+    color: #990033;
+    margin-bottom: 1rem;
+  }
+  
+  .classes-hero p {
+    font-size: 1.5rem;
+    color: #333;
+    max-width: 1100px;
+    margin: 0 auto 0.2rem auto;
+  }
+  
+  .btn-maroon {
+    background-color: #990033;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 900;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+  }
+  
+  .btn-maroon:hover {
+    background-color: #7a002b;
+  }
+  
+  /* === Section Wrapper === */
+  .classes-section {
+    margin: 5rem 0;
+  }
+  
+  .classes-section h2 {
+    font-size: 2rem;
+    color: #990033;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  /* === Onboarding Help Section (Landing-style) === */
+  .scroll-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6rem;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+  }
+  
+  .scroll-text {
+    flex: 1;
+    min-width: 300px;
+    max-width: 600px;
+  }
+  
+  .scroll-text h2 {
+    font-size: 2rem;
+    color: #990033;
+    margin-bottom: 1rem;
+  }
+  
+  .scroll-text p {
+    font-size: 1.6rem;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  .scroll-image {
+    width: 900px;
+    height: 500px;
+    border-radius: 12px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* === Course Grid === */
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+    width: 100%;
+  }
+  
+  /* === Course Tile === */
+  .course-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1.5rem; /* slightly tighter */
+    text-align: left;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }  
+  
+  .course-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+  
+  .course-card h3 {
+    color: #990033;
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .course-card p {
+    font-size: 1.2rem !important;
+    color: #000000 !important;
+    line-height: 1.6;
+  }
+  
+  /* === Catalog Link Section === */
+  .classes-section p {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* === Explore Button Wrapper === */
+  .button-wrapper {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  /* === Responsive Adjustments === */
+  @media (max-width: 768px) {
+    .classes-hero h1 {
+      font-size: 2rem;
+    }
+  
+    .classes-section h2 {
+      font-size: 1.6rem;
+    }
+  
+    .course-card {
+      padding: 1rem;
+    }
+  
+    .course-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .scroll-section {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .scroll-text {
+      max-width: 100%;
+    }
+  
+    .scroll-image {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  /* === Helpful Resources & Roadmap Section === */
+  .resource-section h2 {
+    font-size: 2rem;
+    color: #990033;
+    margin-bottom: 1rem;
+  }
+  
+  .resource-section p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  
+  /* === Coursicle Section === */
+  .coursicle-section h2 {
+    font-size: 1.9rem;
+    color: #990033;
+    margin-bottom: 0.75rem;
+    text-align: center;
+  }
+  
+  .coursicle-section p {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  .coursicle-section .button-wrapper {
+    text-align: center;
+    margin-top: 1.5rem;
+  }
+  
+  /* === Side-by-side Container for Resources & Coursicle === */
+.info-pair-container {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+    max-width: 1800px;
+    padding: 0 2rem;
+  }
+  
+  /* === Individual Sections (Shared Styles) === */
+  .resource-section,
+  .coursicle-section {
+    background-color: #ffffff;
+    border-left: 6px solid #990033;
+    border-right: 6px solid #990033;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    flex: 1 1 700px; /* <- makes them wider */
+    min-width: 600px;
+    max-width: 850px;
+  }
+  
+  /* === Headings for Both Sections === */
+  .resource-section h2,
+  .coursicle-section h2 {
+    font-size: 2rem;
+    color: #990033;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* === Paragraphs for Both Sections === */
+  .resource-section p,
+  .coursicle-section p {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+  }
+  
+  /* === Button Wrapper Shared Style === */
+  .resource-section .button-wrapper,
+  .coursicle-section .button-wrapper {
+    text-align: center;
+    margin-top: 1.5rem;
+  }

@@ -1,0 +1,120 @@
+/* Login.css */
+.login-split-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    width: 100vw;
+  }
+  
+  /* Left Side Form */
+  .login-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 4rem;
+    background-color: white;
+  }
+  
+  .login-form-box {
+    max-width: 900px;
+    width: 100%;
+  }
+  
+  .login-heading {
+    font-size: 3.5rem;
+    color: #990033;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 4rem;
+  }
+  
+  .login-form-box h1 {
+    color: #000000;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .login-form-box form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .login-form-box label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #333;
+    margin-top: 15px;
+  }
+  
+  .login-form-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .btn-maroon {
+    margin-top: 25px;
+    padding: 0.75rem;
+    background-color: #990033;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .btn-maroon:hover {
+    background-color: #7a002b;
+  }
+  
+  .alt-signup-text {
+    text-align: center;
+    margin-top: 1.25rem;
+    color: #333;
+  }
+  
+  .signup-link {
+    color: #990033;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .signup-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Right Side Image */
+  .login-right {
+    flex: 1;
+    position: relative;
+  }
+  
+  .login-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+  }
+  
+  /* Mobile Responsive */
+  @media (max-width: 900px) {
+    .login-split-container {
+      flex-direction: column-reverse;
+      height: auto;
+    }
+  
+    .login-right {
+      display: none;
+    }
+  
+    .login-left {
+      padding: 2rem;
+    }
+  }
+  
