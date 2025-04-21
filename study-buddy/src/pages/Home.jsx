@@ -21,15 +21,15 @@ function Home() {
         <h2>Recent Study Posts</h2>
         <ul className="post-list">
           <li>
-            <strong>CS 2220 – Data Structures</strong><br />
+            <strong>CS 222 – Data Structures</strong><br />
             Looking for a group to review trees and recursion. Meeting on Zoom this weekend.
           </li>
           <li>
-            <strong>CS 3720 – Algorithms</strong><br />
+            <strong>CS 372 – Algorithms</strong><br />
             Anyone down to go over dynamic programming? I’ll bring snacks!
           </li>
           <li>
-            <strong>CS 4140 – Databases</strong><br />
+            <strong>CS 414 – Databases</strong><br />
             Prepping for the ER diagram quiz. Study session at Zuhl Library, Friday at 2pm.
           </li>
         </ul>
