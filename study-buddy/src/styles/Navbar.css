@@ -101,3 +101,13 @@
     }
   }
   
+   /* Profile Picture */
+  .nav-profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #990033;
+    margin-left: 1rem;
+    cursor: pointer;
+  }

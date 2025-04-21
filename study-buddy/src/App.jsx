@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp';
 import Classes from './pages/Classes';
 import Support from './pages/Support';
 import Home from './pages/Home';
+import EditProfile from './pages/EditProfile';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/classes" element={<Classes />} />
             <Route path="/support" element={<Support />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
           </Routes>
           <Footer />
         </div>
