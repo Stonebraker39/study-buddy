@@ -13,6 +13,9 @@ import SignUp from './pages/SignUp';
 import Classes from './pages/Classes';
 import Support from './pages/Support';
 import Home from './pages/Home';
+import LoadClasses from './pages/LoadClasses';
+import SelectClasses from './pages/SelectClasses';
+import PostStudyRequest from './pages/PostStudyRequest';
 
 function App() {
   return (
@@ -29,6 +32,9 @@ function App() {
             <Route path="/classes" element={<Classes />} />
             <Route path="/support" element={<Support />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/load-classes" element={<LoadClasses />} />
+            <Route path="/select-classes" element={<SelectClasses />} />
+            <Route path="/post-study-request" element={<PostStudyRequest />} />
           </Routes>
           <Footer />
         </div>

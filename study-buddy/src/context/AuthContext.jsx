@@ -45,7 +45,6 @@ export function AuthProvider({ children }) {
   // Listen for auth state changes
   useEffect(() => {
     
-    signOut(auth);
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setLoading(false); // Done loading once we know if a user is logged in
