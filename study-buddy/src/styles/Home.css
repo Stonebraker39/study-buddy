@@ -1,73 +1,125 @@
 /* Container */
 .home-container {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 3rem 2rem;
   text-align: center;
 }
 
+/* Welcome heading */
 .home-container h1 {
   font-size: 2.5rem;
   color: #990033;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
+/* Small intro paragraph */
 .home-container p {
   font-size: 1.2rem;
   color: #333;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
-/* Button at top */
-.button-wrapper {
-  margin-bottom: 3rem;
+/* Steps Section */
+.home-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 40px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
+.home-step {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex: 1 1 300px;
+  min-width: 280px;
+  max-width: 340px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Arrow between steps */
+.home-step:not(:last-child)::after {
+  content: '➡️';
+  position: absolute;
+  right: -23px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+
+/* Step title */
+.home-step h3 {
+  color: #990033;
+  margin-bottom: 15px;
+}
+
+/* Step paragraph */
+.home-step p {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+/* Standard button inside step */
 .btn-maroon {
   background-color: #990033;
   color: white;
-  padding: 0.8rem 1.5rem;
+  padding: 10px 18px;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
+  display: inline-block;
   transition: background-color 0.3s ease;
+  min-width: 180px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .btn-maroon:hover {
   background-color: #7a002b;
 }
 
-/* Section background for posts */
+/* Tile grid for posts */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-max, minmax(400px, 1fr));
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+/* Study post sections */
 .study-posts {
   text-align: left;
   background-color: #f9f9f9;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  margin-bottom: 3rem;
+  margin-top: 50px;
 }
 
 .study-posts h2 {
   color: #990033;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Grid layout */
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
-  gap: 30px;
-  margin-top: 20px;
-}
-
-/* Each tile/post */
+/* Each tile (post) */
 .home-tile {
   background-color: #ffffff;
   border: 2px solid #ddd;
   border-radius: 16px;
-  padding: 20px;
+  padding: 25px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
@@ -82,33 +134,71 @@
 
 .home-tile strong {
   color: #990033;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 
 .home-tile p {
-  margin: 6px 0;
+  margin: 8px 0;
   font-size: 1rem;
   color: #333;
 }
 
-/* Button row inside tile */
+/* Buttons inside tiles */
 .tile-button-wrapper {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 15px;
 }
 
-/* Action buttons */
+/* Action buttons inside tiles */
 .edit-btn,
-.delete-btn {
-  padding: 10px 27px;
-  font-size: 0.9rem;
+.delete-btn,
+.home1-accept-btn {
+  padding: 8px 16px;
+  font-size: 0.95rem;
   border-radius: 6px;
   font-weight: bold;
   border: none;
   cursor: pointer;
   transition: 0.2s ease;
+}
+
+.chat-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.chat-btn:hover {
+  background-color: #45a049;
+}
+
+.withdraw-btn {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.accepted-tile {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.withdraw-btn:hover {
+  background-color: #c9302c;
 }
 
 .edit-btn {
@@ -130,14 +220,8 @@
 }
 
 .home1-accept-btn {
-  padding: 10px 27px;
-  min-width: 80px;
   background-color: #4a90e2;
   color: white;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
 }
 
 .home1-accept-btn:hover {

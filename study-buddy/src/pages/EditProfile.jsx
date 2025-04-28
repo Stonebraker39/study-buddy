@@ -12,6 +12,7 @@ function EditProfile() {
 
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [username, setUsername] = useState('');
   const [fullName, setFullName] = useState('');
   const [major, setMajor] = useState('');
   const [year, setYear] = useState('');
@@ -28,6 +29,7 @@ function EditProfile() {
     e.preventDefault();
 
     const profileData = {
+      username,
       fullName,
       major,
       year,
@@ -44,7 +46,7 @@ function EditProfile() {
         profileData.photoURL = photoURL;
       }
 
-      await setDoc(doc(db, 'users', currentUser.uid), profileData, {merge: true});
+      await setDoc(doc(db, 'users', currentUser.uid), profileData, { merge: true });
       alert('Profile saved!');
       navigate('/profile');
     } catch (err) {
@@ -56,10 +58,11 @@ function EditProfile() {
   useEffect(() => {
     const fetchProfile = async () => {
       if (!currentUser?.uid) return;
-      const docRef = doc(db, "users", currentUser.uid);
+      const docRef = doc(db, 'users', currentUser.uid);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
+        setUsername(data.username || '');
         setFullName(data.fullName || '');
         setMajor(data.major || '');
         setYear(data.year || '');
@@ -81,14 +84,54 @@ function EditProfile() {
           {preview && <img src={preview} alt="Preview" className="profile-preview" />}
         </div>
 
+        {/* Username Field */}
+        <label>Username</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+
         <label>Full Name</label>
-        <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+        <input
+          type="text"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          required
+        />
 
         <label>Email</label>
         <input type="email" value={currentUser?.email || ''} readOnly />
 
         <label>Major</label>
-        <input type="text" value={major} onChange={(e) => setMajor(e.target.value)} />
+        <select value={major} onChange={(e) => setMajor(e.target.value)} required>
+          <option value="">Select Major</option>
+
+          {/* Bachelor Degrees */}
+          <option>Computer Science (Algorithm Theory) - Bachelor of Science</option>
+          <option>Computer Science (Artificial Intelligence) - Bachelor of Science</option>
+          <option>Computer Science (Big Data and Data Science) - Bachelor of Science</option>
+          <option>Computer Science (Computer Networking) - Bachelor of Science</option>
+          <option>Computer Science (Cybersecurity) - Bachelor of Science</option>
+          <option>Computer Science (Human Computer Interaction) - Bachelor of Science</option>
+          <option>Computer Science (Secondary Education) - Bachelor of Arts</option>
+          <option>Computer Science (Software Development) - Bachelor of Science</option>
+          <option>Computer Science - Bachelor of Arts</option>
+          <option>Computer Science - Bachelor of Science</option>
+          <option>Cybersecurity - Bachelor of Science</option>
+
+          {/* Master Degrees */}
+          <option>Bioinformatics - Master of Science</option>
+          <option>Computer Science - Master of Science</option>
+          <option>Computer Science - Master of Science (Online)</option>
+          <option>Data Analytics (Digital Agriculture) - Master of Data Analytics (Online)</option>
+          <option>Data Analytics - Master of Data Analytics</option>
+          <option>Data Analytics - Master of Data Analytics (Online)</option>
+
+          {/* Doctoral Degrees */}
+          <option>Computer Science - Doctor of Philosophy</option>
+        </select>
 
         <label>Year</label>
         <select value={year} onChange={(e) => setYear(e.target.value)}>
