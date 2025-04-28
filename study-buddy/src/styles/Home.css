@@ -93,7 +93,7 @@
 /* Tile grid for posts */
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(auto-max, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   justify-content: center;
   gap: 30px;
   margin-top: 30px;

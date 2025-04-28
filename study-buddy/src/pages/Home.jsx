@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { collection, getDocs, doc, getDoc, deleteDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import { useAuth } from '../context/AuthContext';
 import { Link } from 'react-router-dom';
@@ -12,6 +12,8 @@ function Home() {
   const [allUsers, setAllUsers] = useState([]);
   const [classMap, setClassMap] = useState({});
   const [acceptedPosts, setAcceptedPosts] = useState([]);
+  const [editingPostId, setEditingPostId] = useState(null);
+  const [editForm, setEditForm] = useState({ topic: '', day: '', time: '', maxParticipants: '' });
 
   // Fetch posts, users, and classes
   useEffect(() => {
@@ -44,7 +46,7 @@ function Home() {
     fetchData();
   }, [currentUser]);
 
-  // Delete my own study post
+  // Delete my study post
   const handleDelete = async (postId) => {
     const confirm = window.confirm('Are you sure you want to delete this post?');
     if (!confirm) return;
@@ -59,38 +61,75 @@ function Home() {
     }
   };
 
-  // Placeholder for editing my post
-  const handleEdit = (post) => {
-    alert(`Edit clicked for "${post.topic}"`);
+  // Start editing a post
+  const startEditing = (post) => {
+    setEditingPostId(post.id);
+    setEditForm({
+      topic: post.topic,
+      day: post.day,
+      time: post.time,
+      maxParticipants: post.maxParticipants,
+    });
   };
 
-  // Accept a study buddy post
+  // Cancel editing
+  const cancelEditing = () => {
+    setEditingPostId(null);
+    setEditForm({ topic: '', day: '', time: '', maxParticipants: '' });
+  };
+
+  // Save the edited post
+  const saveEdit = async (postId) => {
+    try {
+      const postRef = doc(db, 'studyRequests', postId);
+      await updateDoc(postRef, {
+        topic: editForm.topic,
+        day: editForm.day,
+        time: editForm.time,
+        maxParticipants: editForm.maxParticipants,
+      });
+
+      setAllPosts(prev =>
+        prev.map(post =>
+          post.id === postId ? { ...post, ...editForm } : post
+        )
+      );
+
+      cancelEditing();
+      alert('Post updated!');
+    } catch (err) {
+      console.error('Failed to update:', err);
+      alert('Error updating post.');
+    }
+  };
+
+  // Accept another user's post
   const handleAccept = (post) => {
     if (!acceptedPosts.some(p => p.id === post.id)) {
       setAcceptedPosts(prev => [...prev, post]);
     }
   };
 
-  // Withdraw from an accepted study post
+  // Withdraw from accepted post
   const handleWithdraw = (post) => {
     setAcceptedPosts(prev => prev.filter(p => p.id !== post.id));
   };
 
-  // Placeholder for starting a chat
+  // Placeholder for starting chat
   const handleChat = (post) => {
     alert(`Starting chat with ${getUserName(post.createdBy)} about ${post.topic}`);
   };
 
-  // Get user display name from ID
+  // Get username from user ID
   const getUserName = (uid) => {
     const user = allUsers.find(u => u.uid === uid);
     return user?.username || 'Unknown User';
   };
 
-  // Posts created by me
+  // My own posts
   const myPosts = allPosts.filter(post => post.createdBy === currentUser.uid);
 
-  // Posts created by others in same classes
+  // Posts by others from my same classes
   const relatedPosts = allPosts.filter(
     post =>
       post.createdBy !== currentUser.uid &&
@@ -107,7 +146,7 @@ function Home() {
       <div className="home-steps">
         <div className="home-step">
           <h3>Step 1: Complete Your Profile ✏️</h3>
-          <p>It's important to complete your profile so other students know who you are. Having your name, major, and a little about you helps others feel more comfortable studying with you.</p>
+          <p>It's important to complete your profile so others know who you are. Having your name, major, and a little about you helps others feel more comfortable studying with you.</p>
           <Link to="/edit-profile" className="btn-maroon small-btn">Edit Your Profile</Link>
         </div>
 
@@ -131,16 +170,51 @@ function Home() {
           <div className="home-grid">
             {myPosts.map(post => (
               <div key={post.id} className="home-tile">
-                <strong>{currentUser?.displayName || 'Me'}</strong> wants help in <br />
-                <strong>{classMap[post.classId]}</strong>
-                <p>Topic: {post.topic}</p>
-                <p>Date: {post.day}</p>
-                <p>Time: {post.time}</p>
-                <p>Max Participants: {post.maxParticipants}</p>
-                <div className="tile-button-wrapper">
-                  <button className="edit-btn" onClick={() => handleEdit(post)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(post.id)}>Delete</button>
-                </div>
+                {editingPostId === post.id ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editForm.topic}
+                      onChange={(e) => setEditForm({ ...editForm, topic: e.target.value })}
+                      placeholder="Topic"
+                    />
+                    <input
+                      type="text"
+                      value={editForm.day}
+                      onChange={(e) => setEditForm({ ...editForm, day: e.target.value })}
+                      placeholder="Day"
+                    />
+                    <input
+                      type="text"
+                      value={editForm.time}
+                      onChange={(e) => setEditForm({ ...editForm, time: e.target.value })}
+                      placeholder="Time"
+                    />
+                    <input
+                      type="number"
+                      value={editForm.maxParticipants}
+                      onChange={(e) => setEditForm({ ...editForm, maxParticipants: e.target.value })}
+                      placeholder="Max Participants"
+                    />
+                    <div className="tile-button-wrapper">
+                      <button className="edit-btn" onClick={() => saveEdit(post.id)}>Save</button>
+                      <button className="delete-btn" onClick={cancelEditing}>Cancel</button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <strong>{currentUser?.displayName || 'Me'}</strong> wants help in<br />
+                    <strong>{classMap[post.classId]}</strong>
+                    <p>Topic: {post.topic}</p>
+                    <p>Date: {post.day}</p>
+                    <p>Time: {post.time}</p>
+                    <p>Max Participants: {post.maxParticipants}</p>
+                    <div className="tile-button-wrapper">
+                      <button className="edit-btn" onClick={() => startEditing(post)}>Edit</button>
+                      <button className="delete-btn" onClick={() => handleDelete(post.id)}>Delete</button>
+                    </div>
+                  </>
+                )}
               </div>
             ))}
           </div>
@@ -192,15 +266,9 @@ function Home() {
                 <p>Time: {post.time}</p>
                 <p>Max Participants: {post.maxParticipants}</p>
                 <div className="tile-button-wrapper">
-                  {/* Chat now links to Chat.jsx */}
-                  <Link 
-                    to="/chat" 
-                    className="chat-btn"
-                    style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 16px' }}
-                  >
+                  <Link to="/chat" className="chat-btn" style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 16px' }}>
                     Chat
                   </Link>
-
                   <button className="withdraw-btn" onClick={() => handleWithdraw(post)}>Withdraw</button>
                 </div>
               </div>
