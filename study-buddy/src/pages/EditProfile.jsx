@@ -44,7 +44,7 @@ function EditProfile() {
         profileData.photoURL = photoURL;
       }
 
-      await setDoc(doc(db, 'users', currentUser.uid), profileData);
+      await setDoc(doc(db, 'users', currentUser.uid), profileData, {merge: true});
       alert('Profile saved!');
       navigate('/profile');
     } catch (err) {
