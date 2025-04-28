@@ -13,8 +13,7 @@ function Navbar() {
   // Fetch profile picture from Firestore when user logs in
   useEffect(() => {
     const fetchProfilePic = async () => {
-      // Clear old profile photo when user changes
-      setPhotoURL(null);
+      setPhotoURL(null); // Clear old profile photo when user changes
 
       if (currentUser?.uid) {
         const docRef = doc(db, 'users', currentUser.uid);
@@ -52,6 +51,7 @@ function Navbar() {
           <div className="nav-links">
             <Link to="/home" className="nav-link">Home</Link>
             <Link to="/classes" className="nav-link">Classes</Link>
+            <Link to="/select-classes" className="nav-link">Registration</Link> {/* <-- added Registration */}
             <Link to="/chat" className="nav-link">Chat</Link>
             <Link to="/support" className="nav-link">Support</Link>
           </div>
@@ -59,33 +59,33 @@ function Navbar() {
       </div>
 
       {/* === Right side: Profile or Auth Buttons === */}
-        <div className="nav-right">
+      <div className="nav-right">
         {!currentUser ? (
-            // Not logged in: Show Sign Up & Log In
-            <>
+          // Not logged in: Show Sign Up & Log In
+          <>
             <Link to="/signup" className="nav-button">Sign Up</Link>
             <Link to="/login" className="nav-button login-btn">Log In</Link>
-            </>
+          </>
         ) : (
-            // Logged in: Show profile picture or "Edit Profile", and Log Out
-            <>
+          // Logged in: Show Profile Photo or Edit Profile
+          <>
             {photoURL ? (
-                <Link to="/edit-profile">
+              <Link to="/edit-profile">
                 <img 
-                    src={photoURL} 
-                    alt="Profile" 
-                    className="nav-profile-img" 
+                  src={photoURL} 
+                  alt="Profile" 
+                  className="nav-profile-img" 
                 />
-                </Link>
+              </Link>
             ) : (
-                <Link to="/edit-profile" className="nav-button">
+              <Link to="/edit-profile" className="nav-button">
                 Edit Profile
-                </Link>
+              </Link>
             )}
             <button onClick={handleLogout} className="nav-button login-btn">Log Out</button>
-            </>
+          </>
         )}
-        </div>
+      </div>
     </nav>
   );
 }

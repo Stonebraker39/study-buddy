@@ -1,64 +1,145 @@
+/* Container */
 .home-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-  
-  .home-container h1 {
-    font-size: 2.5rem;
-    color: #990033;
-    margin-bottom: 1rem;
-  }
-  
-  .home-container p {
-    font-size: 1.2rem;
-    color: #333;
-    margin-bottom: 2rem;
-  }
-  
-  .button-wrapper {
-    margin-bottom: 3rem;
-  }
-  
-  .btn-maroon {
-    background-color: #990033;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-maroon:hover {
-    background-color: #7a002b;
-  }
-  
-  .study-posts {
-    text-align: left;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-  }
-  
-  .study-posts h2 {
-    color: #990033;
-    margin-bottom: 1rem;
-  }
-  
-  .post-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .post-list li {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: #333;
-    line-height: 1.5;
-  }
-  
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.home-container h1 {
+  font-size: 2.5rem;
+  color: #990033;
+  margin-bottom: 1rem;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+/* Button at top */
+.button-wrapper {
+  margin-bottom: 3rem;
+}
+
+.btn-maroon {
+  background-color: #990033;
+  color: white;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-maroon:hover {
+  background-color: #7a002b;
+}
+
+/* Section background for posts */
+.study-posts {
+  text-align: left;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  margin-bottom: 3rem;
+}
+
+.study-posts h2 {
+  color: #990033;
+  margin-bottom: 1rem;
+}
+
+/* Grid layout */
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Each tile/post */
+.home-tile {
+  background-color: #ffffff;
+  border: 2px solid #ddd;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.home-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(153, 0, 51, 0.2);
+}
+
+.home-tile strong {
+  color: #990033;
+  font-size: 1.5rem;
+}
+
+.home-tile p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Button row inside tile */
+.tile-button-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Action buttons */
+.edit-btn,
+.delete-btn {
+  padding: 10px 27px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #f0ad4e;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #ec9a2c;
+}
+
+.delete-btn {
+  background-color: #d9534f;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c9302c;
+}
+
+.home1-accept-btn {
+  padding: 10px 27px;
+  min-width: 80px;
+  background-color: #4a90e2;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.home1-accept-btn:hover {
+  background-color: #3a7acb;
+}

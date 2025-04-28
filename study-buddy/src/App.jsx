@@ -14,6 +14,9 @@ import Classes from './pages/Classes';
 import Support from './pages/Support';
 import Home from './pages/Home';
 import EditProfile from './pages/EditProfile';
+import LoadClasses from './pages/LoadClasses';
+import SelectClasses from './pages/SelectClasses';
+import PostStudyRequest from './pages/PostStudyRequest';
 
 function App() {
   return (
@@ -31,6 +34,9 @@ function App() {
             <Route path="/support" element={<Support />} />
             <Route path="/home" element={<Home />} />
             <Route path="/edit-profile" element={<EditProfile />} />
+            <Route path="/load-classes" element={<LoadClasses />} />
+            <Route path="/select-classes" element={<SelectClasses />} />
+            <Route path="/post-study-request" element={<PostStudyRequest />} />
           </Routes>
           <Footer />
         </div>
