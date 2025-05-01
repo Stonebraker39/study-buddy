@@ -33,7 +33,7 @@
 .home-step {
   background: #f9f9f9;
   border-radius: 12px;
-  padding: 25px;
+  padding: 19px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   flex: 1 1 300px;
   min-width: 280px;
@@ -117,7 +117,7 @@
 /* Each tile (post) */
 .home-tile {
   background-color: #ffffff;
-  border: 2px solid #ddd;
+  border: 2px solid #990033;
   border-radius: 16px;
   padding: 25px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
