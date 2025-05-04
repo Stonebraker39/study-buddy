@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 // Images
@@ -15,10 +15,28 @@ import student4 from "../assets/student4.jpg";
 import '../styles/Landing.css';
 
 function Landing() {
+
+  useEffect(() => {
+    const elements = document.querySelectorAll('.animate, .fade-left, .fade-right');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <>
       {/* Hero Banner */}
-      <div className="landing-hero" style={{ backgroundImage: `url(${banner})` }}>
+      <div className="landing-hero animate" style={{ backgroundImage: `url(${banner})` }}>
         <div className="hero-overlay">
           <h1>Welcome to Study Buddy!</h1>
           <p>
@@ -32,8 +50,8 @@ function Landing() {
       {/* Scrollable Sections */}
       <div className="scroll-sections">
 
-        {/* Section 1: Text on left, image on right */}
-        <div className="scroll-section">
+        {/* Section 1 */}
+        <div className="scroll-section fade-left">
           <div className="scroll-text">
             <h2>Match With Classmates Instantly</h2>
             <p>
@@ -47,8 +65,8 @@ function Landing() {
           <img src={photo1} alt="Students studying together" className="scroll-image" />
         </div>
 
-        {/* Section 2: Image on left, text on right */}
-        <div className="scroll-section">
+        {/* Section 2 */}
+        <div className="scroll-section fade-right">
           <img src={photo2} alt="Student using Study Buddy" className="scroll-image" />
           <div className="scroll-text">
             <h2>Safe & Private — For NMSU Students Only</h2>
@@ -57,7 +75,6 @@ function Landing() {
               via NMSU's secure network or VPN — keeping the platform exclusive to verified students. 
               No outside users, no distractions — just fellow CS majors working toward the same goals.
             </p>
-            {/* VPN button */}
             <a 
               href="https://agit.nmsu.edu/services/vpn.html" 
               target="_blank" 
@@ -69,8 +86,8 @@ function Landing() {
           </div>
         </div>
 
-        {/* Section 3: Text on left, photo on right */}
-        <div className="scroll-section">
+        {/* Section 3 */}
+        <div className="scroll-section fade-left">
           <div className="scroll-text">
             <h2>Be Ready for Test Day with Study Tools</h2>
             <p>Go beyond just reading notes. Study Buddy helps you truly understand concepts before the exam.</p>
@@ -93,8 +110,8 @@ function Landing() {
           <img src={photo3} alt="Study tool preview" className="scroll-image" />
         </div>
 
-        {/* Study Buddy Features Section */}
-        <section className="services" id="features">
+        {/* Services Section */}
+        <section className="services animate" id="features">
           <div className="content">
             <div className="title"><span>Why Use Study Buddy?</span></div>
             <div className="boxes">
@@ -146,12 +163,13 @@ function Landing() {
                 <div className="topic">Progress Tracking</div>
                 <p>Track your study habits, participation, and improvement to stay motivated and on top of your goals.</p>
               </div>
+
             </div>
           </div>
         </section>
 
-        {/* User Reviews Section */}
-        <section className="testimonials">
+        {/* Testimonials Section */}
+        <section className="testimonials animate">
           <h2>What Our Students Say</h2>
           <div className="testimonial-boxes">
 
@@ -190,11 +208,12 @@ function Landing() {
               </div>
               <span>- Morgan K.</span>
             </div>
+
           </div>
         </section>
 
         {/* FAQ Section */}
-        <section className="faq-section">
+        <section className="faq-section animate">
           <h2>Frequently Asked Questions</h2>
           <div className="faq-container">
             <details>
@@ -223,6 +242,7 @@ function Landing() {
             </details>
           </div>
         </section>
+
       </div>
     </>
   );

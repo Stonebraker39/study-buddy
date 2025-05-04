@@ -1,12 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../styles/Classes.css';
 import classesImage from '../assets/Classes1.png';
 
 function Classes() {
+
+  useEffect(() => {
+    const elements = document.querySelectorAll('.animate, .fade-left, .fade-right, .fade-up');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   return (
     <div className="classes-page">
       {/* Hero Section */}
-      <section className="classes-hero">
+      <section className="classes-hero animate fade-up">
         <h1>Study Buddy Support CS Classes at NMSU</h1>
         <p>
           Study Buddy is here to help you stay on top of your computer science classes at NMSU. 
@@ -24,8 +42,8 @@ function Classes() {
         </a>
       </section>
 
-      {/* Onboarding Help Section (text left, image right) */}
-      <section className="scroll-section">
+      {/* Onboarding Help Section */}
+      <section className="scroll-section fade-left">
         <div className="scroll-text">
           <h2>Plan Your CS Study Path</h2>
           <p>
@@ -44,140 +62,53 @@ function Classes() {
       </section>
 
       {/* Core CS Study Tiles */}
-      <section className="classes-section">
+      <section className="classes-section animate fade-up">
         <h2>Core CS Courses We Support</h2>
         <div className="course-grid">
-
           {/* Core Required Courses */}
-          <div className="course-card">
-            <h3>CS 1720 – Computer Science I</h3>
-            <p>Intro to programming using basic logic and syntax. Great place to start your CS journey!</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 2210 – Object-Oriented Programming</h3>
-            <p>OOP with Java or C++. Learn how to structure code using classes and methods.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 2220 – Data Structures</h3>
-            <p>Study lists, trees, queues, and more. Core knowledge for technical interviews and real dev work.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 2230 – Assembly Language & Machine Org</h3>
-            <p>Low-level programming and understanding how code works at the hardware level.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 2310 – Discrete Mathematics</h3>
-            <p>Logic, sets, relations, proofs — critical math for all future CS courses.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 3710 – Software Development</h3>
-            <p>Collaborative coding, version control, and building full-scale applications in teams.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 3720 – Algorithms</h3>
-            <p>Advanced sorting, searching, graph algorithms, and runtime analysis.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 3730 – Compilers & Automata Theory</h3>
-            <p>Explore languages, grammars, and the building blocks behind compilers.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4105 – Programming Language Structures</h3>
-            <p>Explore different paradigms: functional, object-oriented, logical, and more.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4110 – Computing Ethics & Social Impact</h3>
-            <p>Understand ethical responsibility, data privacy, and the global effect of computing.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4120 – Operating Systems</h3>
-            <p>Memory management, file systems, scheduling, and how systems interact.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4140 – Database Management Systems</h3>
-            <p>Intro to SQL, ER diagrams, schema design, and database application development.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4980 / 4999 – Senior Project or Thesis</h3>
-            <p>Build a project or research topic from scratch and showcase your cumulative CS knowledge.</p>
-          </div>
-
-          {/* Electives */}
-          <div className="course-card">
-            <h3>CS 4265 – Modern Web Technologies</h3>
-            <p>Front-end and back-end development including modern tools and frameworks.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4205 – Computer Security</h3>
-            <p>Learn how to defend and attack networks, and secure systems from real-world threats.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4255 – Game Design</h3>
-            <p>Design and build interactive games with game engines and programming logic.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4425 – Deep Learning</h3>
-            <p>Study neural networks, backpropagation, and modern AI models like CNNs and RNNs.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4410 – Computer Graphics</h3>
-            <p>Learn to generate images using geometric transformations and rendering algorithms.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4130 – Linux System Administration</h3>
-            <p>Understand how to manage users, services, networking, and files on a Linux system.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4245 – Computer Networks</h3>
-            <p>Explore protocols, routing, network design, and how computers communicate globally.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4250 – Human-Centered Computing</h3>
-            <p>Design systems and interfaces that focus on usability and human interaction.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4305 – Bioinformatics</h3>
-            <p>Analyze biological data using computing methods in genomics and data science.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4420 – Applied Machine Learning</h3>
-            <p>Apply ML models using real-world data to make predictions and gain insights.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4415 – Data Mining</h3>
-            <p>Discover patterns and trends from large datasets using statistical and AI techniques.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4215 – Parallel Programming</h3>
-            <p>Learn to divide tasks among multiple processors to improve performance.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4220 – Cloud and Edge Computing</h3>
-            <p>Understand the infrastructure and services behind cloud systems and edge devices.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4235 – Cellular Networks & Mobile Computing</h3>
-            <p>Explore wireless systems, mobile computing, and their underlying technologies.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4240 – Software Reverse Engineering</h3>
-            <p>Break down programs to understand internal structures and detect vulnerabilities.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4435 – NLP & Text Mining</h3>
-            <p>Extract knowledge from text using techniques in natural language processing and AI.</p>
-          </div>
-          <div className="course-card">
-            <h3>CS 4440 – Generative AI</h3>
-            <p>Use machine learning models to create new content like images, text, and code.</p>
-          </div>
+          {[
+            ["CS 1720 – Computer Science I", "Intro to programming using basic logic and syntax. Great place to start your CS journey!"],
+            ["CS 2210 – Object-Oriented Programming", "OOP with Java or C++. Learn how to structure code using classes and methods."],
+            ["CS 2220 – Data Structures", "Study lists, trees, queues, and more. Core knowledge for technical interviews and real dev work."],
+            ["CS 2230 – Assembly Language & Machine Org", "Low-level programming and understanding how code works at the hardware level."],
+            ["CS 2310 – Discrete Mathematics", "Logic, sets, relations, proofs — critical math for all future CS courses."],
+            ["CS 3710 – Software Development", "Collaborative coding, version control, and building full-scale applications in teams."],
+            ["CS 3720 – Algorithms", "Advanced sorting, searching, graph algorithms, and runtime analysis."],
+            ["CS 3730 – Compilers & Automata Theory", "Explore languages, grammars, and the building blocks behind compilers."],
+            ["CS 4105 – Programming Language Structures", "Explore different paradigms: functional, object-oriented, logical, and more."],
+            ["CS 4110 – Computing Ethics & Social Impact", "Understand ethical responsibility, data privacy, and the global effect of computing."],
+            ["CS 4120 – Operating Systems", "Memory management, file systems, scheduling, and how systems interact."],
+            ["CS 4140 – Database Management Systems", "Intro to SQL, ER diagrams, schema design, and database application development."],
+            ["CS 4980 / 4999 – Senior Project or Thesis", "Build a project or research topic from scratch and showcase your cumulative CS knowledge."],
+            ["CS 4265 – Modern Web Technologies", "Front-end and back-end development including modern tools and frameworks."],
+            ["CS 4205 – Computer Security", "Learn how to defend and attack networks, and secure systems from real-world threats."],
+            ["CS 4255 – Game Design", "Design and build interactive games with game engines and programming logic."],
+            ["CS 4425 – Deep Learning", "Study neural networks, backpropagation, and modern AI models like CNNs and RNNs."],
+            ["CS 4410 – Computer Graphics", "Learn to generate images using geometric transformations and rendering algorithms."],
+            ["CS 4130 – Linux System Administration", "Understand how to manage users, services, networking, and files on a Linux system."],
+            ["CS 4245 – Computer Networks", "Explore protocols, routing, network design, and how computers communicate globally."],
+            ["CS 4250 – Human-Centered Computing", "Design systems and interfaces that focus on usability and human interaction."],
+            ["CS 4305 – Bioinformatics", "Analyze biological data using computing methods in genomics and data science."],
+            ["CS 4420 – Applied Machine Learning", "Apply ML models using real-world data to make predictions and gain insights."],
+            ["CS 4415 – Data Mining", "Discover patterns and trends from large datasets using statistical and AI techniques."],
+            ["CS 4215 – Parallel Programming", "Learn to divide tasks among multiple processors to improve performance."],
+            ["CS 4220 – Cloud and Edge Computing", "Understand the infrastructure and services behind cloud systems and edge devices."],
+            ["CS 4235 – Cellular Networks & Mobile Computing", "Explore wireless systems, mobile computing, and their underlying technologies."],
+            ["CS 4240 – Software Reverse Engineering", "Break down programs to understand internal structures and detect vulnerabilities."],
+            ["CS 4435 – NLP & Text Mining", "Extract knowledge from text using techniques in natural language processing and AI."],
+            ["CS 4440 – Generative AI", "Use machine learning models to create new content like images, text, and code."]
+          ].map(([title, desc], idx) => (
+            <div className="course-card fade-up" key={idx}>
+              <h3>{title}</h3>
+              <p>{desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Helpful Resources & Coursicle - Side by Side */}
+      {/* Helpful Resources & Coursicle */}
       <section className="info-pair-container">
-        {/* Course Roadmap Section */}
-        <div className="resource-section">
+        <div className="resource-section animate fade-left">
           <h2><i className="fas fa-map-signs"></i> Other Helpful Resources</h2>
           <p>
             <i className="fas fa-book"></i> Use the NMSU catalog to understand prerequisites, graduation requirements, 
@@ -200,8 +131,7 @@ function Classes() {
           </div>
         </div>
 
-        {/* Coursicle Info Section */}
-        <div className="coursicle-section">
+        <div className="coursicle-section animate fade-right">
           <h2><i className="fas fa-info-circle"></i> Looking for Even More Class Info?</h2>
           <p>
             <i className="fas fa-comments"></i> Sites like <strong>Coursicle</strong> give you a real look into each CS class at NMSU.

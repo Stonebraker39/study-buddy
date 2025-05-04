@@ -211,7 +211,7 @@
   }
   
   /* === Side-by-side Container for Resources & Coursicle === */
-.info-pair-container {
+  .info-pair-container {
     display: flex;
     gap: 2.5rem;
     justify-content: center;
@@ -258,4 +258,28 @@
   .coursicle-section .button-wrapper {
     text-align: center;
     margin-top: 1.5rem;
+  }
+
+  /* Animation Styles */
+  .animate, .fade-left, .fade-right, .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.6s ease-out;
+  }
+
+  .show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-left {
+    transform: translateX(-50px);
+  }
+
+  .fade-right {
+    transform: translateX(50px);
+  }
+
+  .fade-up {
+    transform: translateY(50px);
   }

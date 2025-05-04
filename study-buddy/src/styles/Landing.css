@@ -84,9 +84,10 @@
     height: auto;
     border-radius: 12px;
     object-fit: cover;
+    padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
-  
+
   .features-list {
     list-style: none;
     padding: 0;
@@ -288,3 +289,80 @@
     color: #333;
   }
   
+  /* --- Animations --- */
+
+  /* Fade In Up Animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Animation classes */
+  .animate {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate.show {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+
+  /* Hero animation */
+  .landing-hero {
+    animation: fadeInUp 1s ease-out;
+  }
+
+  /* Fade In Left */
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Fade In Right */
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* New animation classes */
+  .fade-left {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-left.show {
+    opacity: 1;
+    transform: translateX(0);
+    animation: fadeInLeft 0.8s ease forwards;
+  }
+
+  .fade-right {
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-right.show {
+    opacity: 1;
+    transform: translateX(0);
+    animation: fadeInRight 0.8s ease forwards;
+  }
