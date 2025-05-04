@@ -6,7 +6,6 @@ import { AuthProvider } from './context/AuthContext';
 
 // Pages
 import Landing from './pages/Landing';
-import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
@@ -26,7 +25,6 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/chat" element={<Chat />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />

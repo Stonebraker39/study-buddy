@@ -139,6 +139,12 @@ function Home() {
       userClasses.some(cls => typeof cls === 'string' ? cls === post.classId : cls.id === post.classId)
   );
 
+  const getUserEmail = (uid) => {
+    const user = allUsers.find(u => u.uid === uid);
+    return user?.email || 'Unavailable';
+  };
+
+
   return (
     <div className="home-container">
       {/* Welcome */}
@@ -241,9 +247,9 @@ function Home() {
                 <p>Time: {post.time}</p>
                 <p>Max Participants: {post.maxParticipants}</p>
                 <div className="tile-button-wrapper">
-                  <Link to="/chat" className="chat-btn" style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 16px' }}>
-                    Chat
-                  </Link>
+                  <p className="email-contact">
+                    Contact: <a href={`mailto:${getUserEmail(post.createdBy)}`}>{getUserEmail(post.createdBy)}</a>
+                  </p>
                   <button className="withdraw-btn" onClick={() => handleWithdraw(post)}>Withdraw</button>
                 </div>
               </div>

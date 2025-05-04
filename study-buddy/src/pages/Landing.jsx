@@ -119,8 +119,8 @@ function Landing() {
                 <div className="icon">
                   <i className="fas fa-comments"></i>
                 </div>
-                <div className="topic">Built-in Messaging</div>
-                <p>Chat directly with your matched study partners and share Zoom links or questions instantly.</p>
+                <div className="topic">Email Matching</div>
+                <p>Once matched, view your partner's NMSU email to coordinate directly — no extra steps.</p>
               </div>
 
               <div className="box">

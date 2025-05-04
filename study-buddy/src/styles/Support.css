@@ -1,0 +1,66 @@
+.support-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 80px 20px 60px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.support-container h1 {
+    color: #990033;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.support-container p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.support-form {
+    text-align: left;
+}
+
+.support-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.support-form input,
+.support-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+}
+
+.support-form input:focus,
+.support-form textarea:focus {
+    border-color: #990033;
+    outline: none;
+}
+
+.support-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.success-message {
+    font-size: 1.2rem;
+    color: green;
+    margin-top: 40px;
+}
+
+.support-image {
+    max-width: 400px;
+    margin: 20px auto 30px;
+    display: block;
+}

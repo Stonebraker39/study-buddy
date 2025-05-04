@@ -143,6 +143,23 @@
   color: #333;
 }
 
+.email-contact {
+  margin: 8px 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.email-contact a {
+  color: #990033;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.email-contact a:hover {
+  text-decoration: underline;
+}
+
+
 /* Buttons inside tiles */
 .tile-button-wrapper {
   display: flex;
