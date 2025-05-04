@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 
 // Images
 import banner from '../assets/banner.png';
@@ -16,8 +18,18 @@ import '../styles/Landing.css';
 
 function Landing() {
 
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+
   useEffect(() => {
+    if (currentUser) {
+      navigate('/home');
+      return;
+    }
+
     const elements = document.querySelectorAll('.animate, .fade-left, .fade-right');
+
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {

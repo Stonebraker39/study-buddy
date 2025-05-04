@@ -48,7 +48,7 @@ function EditProfile() {
 
       await setDoc(doc(db, 'users', currentUser.uid), profileData, { merge: true });
       alert('Profile saved!');
-      navigate('/profile');
+      navigate('/home');
     } catch (err) {
       console.error('Error saving profile:', err);
       alert('Failed to save profile.');

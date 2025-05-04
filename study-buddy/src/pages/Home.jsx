@@ -14,6 +14,8 @@ function Home() {
   const [acceptedPosts, setAcceptedPosts] = useState([]);
   const [editingPostId, setEditingPostId] = useState(null);
   const [editForm, setEditForm] = useState({ topic: '', day: '', time: '', maxParticipants: '' });
+  const [userData, setUserData] = useState(null);
+
 
   // Load posts, users, classes, accepted posts
   useEffect(() => {
@@ -28,8 +30,10 @@ function Home() {
         const userRef = doc(db, 'users', currentUser.uid);
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
-          const userData = userDoc.data();
-          setUserClasses(userData.classes || []);
+          const data = userDoc.data();
+          setUserData(data); // <-- store Firestore user info
+          setUserClasses(data.classes || []);
+
 
           // Load accepted post IDs and match to posts
           if (userData.acceptedPosts) {
@@ -148,7 +152,7 @@ function Home() {
   return (
     <div className="home-container">
       {/* Welcome */}
-      <h1>Welcome, {currentUser?.displayName || 'Student'} 👋</h1>
+      <h1>Welcome, {userData?.username || 'Student'} 👋</h1>
       <p>Ready to study smarter? Let's start with 3 easy steps:</p>
 
       {/* 3 Steps */}
@@ -190,7 +194,7 @@ function Home() {
                   </>
                 ) : (
                   <>
-                    <strong>{currentUser?.displayName || 'Me'}</strong> wants help in<br />
+                    <strong>{userData?.username || 'Me'}</strong> wants help in<br />
                     <strong>{classMap[post.classId]}</strong>
                     <p>Topic: {post.topic}</p>
                     <p>Date: {post.day}</p>
