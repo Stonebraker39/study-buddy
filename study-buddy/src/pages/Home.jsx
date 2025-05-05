@@ -33,7 +33,7 @@ function Home() {
           setUserData(data);
           setUserClasses(data.classes || []);
 
-          // Load accepted post IDs and match to posts
+          // Load accepted post IDs
           if (data.acceptedPosts) {
             const accepted = posts.filter(post => data.acceptedPosts.includes(post.id));
             setAcceptedPosts(accepted);
@@ -122,12 +122,29 @@ function Home() {
   };
 
   // Withdraw from accepted post
-  const handleWithdraw = (post) => {
-    setAcceptedPosts(prev => prev.filter(p => p.id !== post.id));
-    // (Optional) You can update Firestore too if needed
+  const handleWithdraw = async (post) => {
+    try {
+      // 1. Update UI immediately
+      setAcceptedPosts(prev => prev.filter(p => p.id !== post.id));
+
+      // 2. Update Firestore too
+      const userRef = doc(db, 'users', currentUser.uid);
+      const userDoc = await getDoc(userRef);
+
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const updatedAcceptedPosts = (userData.acceptedPosts || []).filter(id => id !== post.id);
+
+        await updateDoc(userRef, {
+          acceptedPosts: updatedAcceptedPosts,
+        });
+      }
+    } catch (err) {
+      console.error('Withdraw save error:', err);
+    }
   };
 
-  // Get user's display name
+  // Get user's name
   const getUserName = (uid) => {
     const user = allUsers.find(u => u.uid === uid);
     return user?.username || 'Unknown User';
@@ -137,6 +154,12 @@ function Home() {
   const getUserEmail = (uid) => {
     const user = allUsers.find(u => u.uid === uid);
     return user?.email || 'Unavailable';
+  };
+
+  // Get user's profile photo
+  const getUserPhoto = (uid) => {
+    const user = allUsers.find(u => u.uid === uid);
+    return user?.photoURL || '/default-avatar.png';
   };
 
   // Separate posts
@@ -192,8 +215,11 @@ function Home() {
                   </>
                 ) : (
                   <>
-                    <strong>{userData?.username || 'Me'}</strong> wants help in<br />
-                    <strong>{classMap[post.classId]}</strong>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <img src={getUserPhoto(post.createdBy)} alt="Profile" className="profile-pic" />
+                      <strong>{userData?.username || 'Me'}</strong>
+                    </div>
+                    <strong> wants help in {classMap[post.classId]}</strong>
                     <p>Topic: {post.topic}</p>
                     <p>Date: {post.day}</p>
                     <p>Time: {post.time}</p>
@@ -219,7 +245,11 @@ function Home() {
               const isAccepted = acceptedPosts.some(p => p.id === post.id);
               return (
                 <div key={post.id} className={`home-tile ${isAccepted ? 'accepted-tile' : ''}`} style={isAccepted ? { opacity: 0.6, pointerEvents: 'none' } : {}}>
-                  <strong>{getUserName(post.createdBy)}</strong> wants help in <strong>{classMap[post.classId]}</strong>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <img src={getUserPhoto(post.createdBy)} alt="Profile" className="profile-pic" />
+                    <strong>{getUserName(post.createdBy)}</strong>
+                  </div>
+                  <strong> wants help in {classMap[post.classId]}</strong>
                   <p>Topic: {post.topic}</p>
                   <p>Date: {post.day}</p>
                   <p>Time: {post.time}</p>
@@ -243,7 +273,11 @@ function Home() {
           <div className="home-grid">
             {acceptedPosts.map(post => (
               <div key={post.id} className="home-tile">
-                <strong>{getUserName(post.createdBy)}</strong> is studying <strong>{classMap[post.classId]}</strong>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <img src={getUserPhoto(post.createdBy)} alt="Profile" style={{ width: '40px', height: '40px', borderRadius: '50%' }} />
+                  <strong>{getUserName(post.createdBy)}</strong>
+                </div>
+                <strong> is studying {classMap[post.classId]}</strong>
                 <p>Topic: {post.topic}</p>
                 <p>Date: {post.day}</p>
                 <p>Time: {post.time}</p>
