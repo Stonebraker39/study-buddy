@@ -78,10 +78,18 @@ function EditProfile() {
     <div className="profile-container">
       <h1>Edit Your Profile</h1>
       <form onSubmit={handleSubmit} className="profile-form">
+
+        {/* Profile Picture Preview (centered at top) */}
+        {preview && (
+          <div className="profile-preview-wrapper">
+            <img src={preview} alt="Preview" className="profile-preview" />
+          </div>
+        )}
+
+        {/* Upload New Profile Picture */}
         <div className="profile-image-upload">
           <label htmlFor="pfp">Profile Picture</label>
           <input type="file" id="pfp" accept="image/*" onChange={handleImageChange} />
-          {preview && <img src={preview} alt="Preview" className="profile-preview" />}
         </div>
 
         {/* Username Field */}

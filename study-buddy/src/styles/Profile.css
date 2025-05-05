@@ -45,13 +45,18 @@
     align-items: flex-start;
   }
   
+  .profile-preview-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
   .profile-preview {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     object-fit: cover;
-    margin-top: 10px;
     border-radius: 50%;
-    border: 2px solid #990033;
+    border: 3px solid #990033;
   }
   
   .btn-maroon {
