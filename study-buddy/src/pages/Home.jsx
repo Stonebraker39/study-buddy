@@ -16,7 +16,6 @@ function Home() {
   const [editForm, setEditForm] = useState({ topic: '', day: '', time: '', maxParticipants: '' });
   const [userData, setUserData] = useState(null);
 
-
   // Load posts, users, classes, accepted posts
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +30,12 @@ function Home() {
         const userDoc = await getDoc(userRef);
         if (userDoc.exists()) {
           const data = userDoc.data();
-          setUserData(data); // <-- store Firestore user info
+          setUserData(data);
           setUserClasses(data.classes || []);
 
-
           // Load accepted post IDs and match to posts
-          if (userData.acceptedPosts) {
-            const accepted = posts.filter(post => userData.acceptedPosts.includes(post.id));
+          if (data.acceptedPosts) {
+            const accepted = posts.filter(post => data.acceptedPosts.includes(post.id));
             setAcceptedPosts(accepted);
           }
         }
@@ -107,7 +105,7 @@ function Home() {
     }
   };
 
-  // Accept a study post (save to database)
+  // Accept a study post
   const handleAccept = async (post) => {
     if (!acceptedPosts.some(p => p.id === post.id)) {
       setAcceptedPosts(prev => [...prev, post]);
@@ -126,13 +124,19 @@ function Home() {
   // Withdraw from accepted post
   const handleWithdraw = (post) => {
     setAcceptedPosts(prev => prev.filter(p => p.id !== post.id));
-    // (Optional) you can also update Firestore to remove it later if needed
+    // (Optional) You can update Firestore too if needed
   };
 
   // Get user's display name
   const getUserName = (uid) => {
     const user = allUsers.find(u => u.uid === uid);
     return user?.username || 'Unknown User';
+  };
+
+  // Get user's email
+  const getUserEmail = (uid) => {
+    const user = allUsers.find(u => u.uid === uid);
+    return user?.email || 'Unavailable';
   };
 
   // Separate posts
@@ -142,12 +146,6 @@ function Home() {
       post.createdBy !== currentUser.uid &&
       userClasses.some(cls => typeof cls === 'string' ? cls === post.classId : cls.id === post.classId)
   );
-
-  const getUserEmail = (uid) => {
-    const user = allUsers.find(u => u.uid === uid);
-    return user?.email || 'Unavailable';
-  };
-
 
   return (
     <div className="home-container">
